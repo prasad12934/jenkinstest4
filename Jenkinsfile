@@ -37,7 +37,7 @@ pipeline {
                             -DskipTests ^
                             -DconnectedAppClientId=%CONNECTED_APP_CLIENT_ID% ^
                             -DconnectedAppClientSecret=%CONNECTED_APP_CLIENT_SECRET% ^
-                            -DapplicationName=test-p-d-d-jenkins
+                            -DapplicationName=jenkins-test-4
                     """
                 }
             }
