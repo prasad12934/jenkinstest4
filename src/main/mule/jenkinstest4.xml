@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="099622e9-7a5d-43ff-8fb9-2cc21e80b65c" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="jenkinstest4Flow" doc:id="8d279b5b-be09-4785-9176-f8ede4f56784" >
+		<http:listener doc:name="Listener" doc:id="cded93cb-8c53-4f9f-9ac8-c44f0f1f6b25" config-ref="HTTP_Listener_config" path="jtest4"/>
+		<logger level="INFO" doc:name="Logger" doc:id="99a8e89d-9bf2-4365-a1a4-79beb3e887b3" message="input payload #|#[payload]"/>
+		<ee:transform doc:name="Transform Message" doc:id="1baf3307-5621-470f-8ee3-dfff3852db18">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/xml
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="4206cce0-7faa-47e4-a324-d9b85c05acc7" message="output payload #[payload]"/>
+	</flow>
+</mule>
